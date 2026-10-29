@@ -1,0 +1,34 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Webcam Object Highlighter</title>
+<style>
+body{font-family:system-ui,sans-serif;max-width:1000px;margin:1.5rem auto;padding:0 1rem;color:#1f2937}
+.bar{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;margin:.5rem 0}
+button,select,input{font:inherit;padding:.35rem .7rem}
+canvas{border:1px solid #d1d5db;background:#f9fafb;max-width:100%;cursor:crosshair;display:block}
+video{max-width:320px;border:1px solid #d1d5db}
+pre{background:#f3f4f6;padding:.75rem;max-height:260px;overflow:auto;font-size:12px}
+.legend span{display:inline-block;width:12px;height:12px;margin:0 .3rem 0 .8rem;vertical-align:middle}
+footer{margin-top:2rem;color:#6b7280;font-size:.9rem}
+</style></head><body>
+<h1>Webcam Object Highlighter</h1>
+<p>Load an image or grab a camera frame. The detector boxes interesting regions; drag on the image to add your own boxes. Export as COCO-style JSON.</p>
+<div class="bar">
+  <input type="file" id="file" accept="image/*">
+  <button id="sample">Use sample image</button>
+  <button id="cam">Start camera</button><button id="snap" hidden>Capture frame</button>
+</div>
+<video id="video" autoplay playsinline muted hidden></video>
+<div class="bar">
+  Detector <select id="detector"></select>
+  Sensitivity <input type="range" id="sens" min="0" max="1" step="0.05" value="0.5">
+  <button id="detect">Re-detect</button>
+  Label for manual boxes <input id="label" value="object" size="10">
+  <button id="clear">Clear boxes</button> <b id="count">0 boxes</b>
+</div>
+<div class="legend"><span style="background:#f59e0b"></span>detector<span style="background:#2563eb"></span>manual</div>
+<canvas id="canvas" width="960" height="540"></canvas>
+<div class="bar"><h3 style="margin:0">COCO JSON</h3><button id="export">Download .json</button></div>
+<pre id="json"></pre>
+<footer>Built by <a href="https://trevorheshka.com">Trevor Heshka</a> · MIT · everything runs in your browser</footer>
+<script src="detector.js"></script><script src="app.js"></script>
+</body></html>
